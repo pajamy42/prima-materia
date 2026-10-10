@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Prima Materia — story questions</title>
+<style>
+:root{--bg:#0a0912;--panel:rgba(24,20,44,.78);--line:rgba(190,170,255,.22);--tx:#f1eefb;--mut:#b9b2d4;--gold:#ecc979;--teal:#74e6d3;--vio:#a78bfa;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*:before,*:after{box-sizing:inherit}
+body{margin:0;min-height:100vh;color:var(--tx);background:var(--bg) radial-gradient(ellipse 70% 50% at 15% 0%,#2b1d55 0,transparent 70%) no-repeat,radial-gradient(ellipse 60% 45% at 100% 100%,#0d3b44 0,transparent 70%) no-repeat;background-attachment:fixed;font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:28px 18px 48px}
+header{text-align:center;margin-bottom:22px}
+.glyph{color:var(--gold);letter-spacing:.6em;font-size:14px;opacity:.9}
+h1{margin:6px 0 2px;font-size:clamp(26px,5vw,38px);font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+header p{margin:0 auto;max-width:560px;color:var(--mut);font-size:15px}
+.grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:18px;align-items:start}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;backdrop-filter:blur(6px)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+.chip{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--mut);font:inherit;font-size:13px;cursor:pointer}
+.chip.done{border-color:var(--teal);color:var(--teal)}
+.chip.on{background:var(--gold);border-color:var(--gold);color:#17122b;font-weight:700}
+.sec{color:var(--gold);font-size:13px;letter-spacing:.18em;text-transform:uppercase}
+.lens{color:var(--mut);font-size:13px;margin:2px 0 16px}
+.bar{height:3px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:6px}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--vio),var(--teal))}
+.cnt{color:var(--mut);font-size:13px;margin-bottom:14px}
+.q{font-size:clamp(20px,3.4vw,25px);line-height:1.35;margin:0 0 16px;font-weight:500}
+textarea{width:100%;min-height:150px;resize:vertical;padding:14px;border-radius:12px;border:1px solid var(--line);background:rgba(8,6,18,.7);color:var(--tx);font:inherit;font-size:16px;line-height:1.55}
+textarea:focus,button:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.hint{color:var(--mut);font-size:13px;margin:8px 0 16px}
+.nav{display:flex;gap:10px;justify-content:space-between}
+.btn{padding:10px 20px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--tx);font:inherit;font-size:15px;cursor:pointer}
+.btn.p{background:linear-gradient(135deg,var(--vio),#6d5bd0);border-color:transparent;font-weight:600}
+.btn:disabled{opacity:.4;cursor:default}
+.side{position:sticky;top:16px}
+.side h2{margin:0 0 12px;font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--teal)}
+#out{white-space:pre-wrap;min-height:220px;max-height:60vh;overflow-y:auto;padding:14px;border-radius:12px;background:rgba(8,6,18,.7);border:1px solid var(--line);font-size:16px;line-height:1.7;overflow-wrap:anywhere}
+#out.empty{color:var(--mut);font-style:italic}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px;flex-wrap:wrap}
+.row span{color:var(--mut);font-size:13px}
+@media(max-width:820px){.grid{grid-template-columns:minmax(0,1fr)}.side{position:static}#out{max-height:none}}
+.entry{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 6px}
+.eb{padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--tx);font:inherit;font-size:15px;cursor:pointer}
+.eb.on{background:var(--gold);border-color:var(--gold);color:#17122b;font-weight:700}
+.top{margin-bottom:20px}
+.top h3{margin:0 0 10px;font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.nm{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:16px;color:var(--mut);font-size:14px}
+.nm input{flex:1;min-width:180px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:rgba(8,6,18,.7);color:var(--tx);font:inherit;font-size:16px}
+.nm input:focus{outline:2px solid var(--teal);outline-offset:2px}
+section{margin-top:26px}
+.stem{padding:12px 14px;margin-top:10px;border-radius:12px;border:1px solid transparent;border-left:3px solid var(--line)}
+.stem.sug{border-color:var(--line);border-left-color:var(--gold);background:rgba(236,201,121,.07)}
+.tx{margin:0;font-size:18px;line-height:1.5}
+.bl{color:var(--gold);border-bottom:2px solid var(--gold);padding:0 6px;margin:0 2px}
+.stem textarea{min-height:44px;height:44px;margin-top:8px;resize:none;overflow:hidden;padding:10px 12px}
+.sug .tx:before{content:"✦ ";color:var(--gold)}
+.lang{display:flex;justify-content:center;gap:6px;margin-bottom:10px}
+.lb{padding:4px 12px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--mut);font:inherit;font-size:13px;cursor:pointer}
+.lb.on{color:var(--gold);border-color:var(--gold)}
+.fab{position:fixed;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:8px;z-index:5}
+.fab button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:rgba(24,20,44,.92);color:var(--gold);font-size:18px;cursor:pointer}
+textarea#out{display:block;min-height:320px;max-height:70vh;resize:vertical}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="lang"><button class="lb" data-l="en">EN</button><button class="lb" data-l="ru">RU</button></div>
+<div class="glyph">✦ ☽ ☉ ☽ ✦</div>
+<h1>Prima Materia</h1>
+<p id="sub"></p>
+</header>
+<div class="grid">
+<main class="card">
+<div class="top">
+<h3 id="what"></h3>
+<div class="entry" id="entry"></div>
+<div class="nm"><label for="name" id="namelbl"></label><input id="name" autocomplete="off"></div>
+</div>
+<div class="chips" id="chips"></div>
+<div id="list"></div>
+</main>
+<aside class="card side">
+<h2 id="sidet"></h2>
+<textarea id="out"></textarea>
+<div class="row"><span id="wc"></span><span><button class="btn" id="clr"></button> <button class="btn p" id="cpy"></button></span></div>
+</aside>
+</div>
+</div>
+<div class="fab"><button id="up" aria-label="Top">↑</button><button id="dn" aria-label="Bottom">↓</button></div>
+<script>
+const S=[
+["Seeds","Whatever you have, however small",[
+"n|Lately I can't stop thinking about _.",
+"n|A story I wish existed is one where _.",
+"s|It's a story about _, but _.",
+"i|I keep picturing _.",
+"i|Just before that moment, _.",
+"i|Just after it, _.",
+"f|I keep coming back to the idea of _."]],
+["The World","Given circumstances, from the whole world down to the street",[
+"p|It takes place in _, at a time when _.",
+"p|The place {N} calls home is _.",
+"p|In {N}'s everyday surroundings, _ is always there.",
+"p|The people {N} sees every day are _.",
+"p|In this place, _ is normal, though an outsider would find it strange.",
+"|The rules, written and unwritten, are these: _ is allowed, and _ is not.",
+"|Power belongs to _, who keep it by _.",
+"|Ordinary people live under the pressure of _.",
+"p|The past still shapes the present: _.",
+"|Anyone who breaks the rules _.",
+"|Even before the story begins, _ is fragile or about to break."]],
+["The Main Character","Who they are, what they want, what they cannot see",[
+"c|The story follows {N}, who _.",
+"c|Others first notice _ about {N}.",
+"|{N} was born into _.",
+"|{N} handles pressure by _.",
+"|{N} is afraid of _, and hungry for _.",
+"c|{N} wants _, because _.",
+"|What {N} truly needs, without knowing it, is _.",
+"|{N} believes _.",
+"|A past event that still shapes {N} is _.",
+"|{N}'s greatest weakness is _.",
+"|{N} is genuinely good at _.",
+"|{N} is not entirely consistent: _.",
+"|{N} is hiding _.",
+"|The line {N} will not cross is _.",
+"|A normal day for {N} looks like _.",
+"|People think {N} is _, but really _.",
+"|{N} would sacrifice _ for what {N} wants, but never _.",
+"|Underneath every smaller goal, {N} is chasing _.",
+"f|{N} cares deeply about _, but also about _, and the two collide when _."]],
+["What Stands in the Way","Opposition from outside, from others, and from within",[
+"|What opposes {N} most directly is _.",
+"|It wants _, and from the inside that feels justified because _.",
+"|It is like {N} in that _, and different in that _.",
+"|Its greatest advantage is _.",
+"|If {N} did nothing, it would _.",
+"|Inside {N}, the part that works against {N}'s goal is _.",
+"|Someone close to {N} stands in the way, even lovingly: _.",
+"|Beyond people, _ presses on {N} as well."]],
+["The People Around Them","Allies, mirrors, and the relationship at the center",[
+"|{N}'s allies are _, and each gives {N} _.",
+"|Someone who challenges {N}'s beliefs by living differently is _.",
+"|A foil who shows {N} by contrast is _.",
+"|The central relationship is between {N} and _, and the tension in it is _.",
+"|A guide for {N} is _, who withholds or gets wrong _.",
+"|_ could betray or abandon {N}, because _.",
+"|Others want things of their own: _.",
+"|{N} cares for _ most, and hurts _ most."]],
+["The Beginning","Balance, disruption, and the point of no return",[
+"|At the start, life for {N} is _, and what is missing is _.",
+"i|The opening shows _.",
+"s|Everything changes when _.",
+"|{N} can't ignore it because _.",
+"|At first, {N} responds by _.",
+"|The point of no return comes when {N} _.",
+"|From then on, {N} sets out to _, with the plan of _.",
+"|If {N} succeeds, _; if {N} fails, _.",
+"|Time matters because _."]],
+["The Middle","Complications, reversals, and the cost of each attempt",[
+"|The first real attempt is _, and the world pushes back by _.",
+"|Along the way, {N} learns _.",
+"|Obstacle by obstacle: first _, because of that _, and because of that _.",
+"|The plan fails when _, so {N} improvises by _.",
+"|The stakes rise when _.",
+"|At the midpoint, _ happens, and the story becomes something else.",
+"|Relationships shift: _ becomes an ally, and _ turns away.",
+"|The opposition strikes back by _.",
+"|A secret comes out: _.",
+"|{N}'s flaw leads {N} to _, which costs _.",
+"|{N} comes closest to changing when _, but falls back when _."]],
+["The Turn","Lowest point, recognition, and the impossible choice",[
+"|At the lowest point, _ is lost.",
+"|{N} finally sees _.",
+"|The impossible choice is between _ and _.",
+"|{N} decides _, which shows who {N} really is."]],
+["The End","Climax, cost, and the new balance",[
+"e|The story ends with _.",
+"e|The climax: _.",
+"|As for what {N} wanted: _.",
+"|As for what {N} needed: _.",
+"|The opposition ends when _.",
+"|The cost: _.",
+"|Afterward, the world is _, but _ remains the same.",
+"|By the end, {N} _.",
+"|Of the others, _.",
+"e|The final image is _.",
+"|Left deliberately open: _."]],
+["What It Means","Conclusions: easiest to write last",[
+"f|The journey says that _.",
+"|By the end, a person should understand _, which they couldn't at the start.",
+"|The story keeps returning to _.",
+"|Planted early and paid off late: _.",
+"|The heart of the story is the scene where _.",
+"|What is still unclear: _."]]
+];
+const RT=[["Зёрна","Всё, что есть, даже самое маленькое"],["Мир","Обстоятельства: от целого мира до одной улицы"],["Главный герой","Кто он, чего хочет и чего не видит"],["Что стоит на пути","Противодействие: снаружи, от других и изнутри"],["Люди вокруг","Союзники, зеркала и центральные отношения"],["Начало","Равновесие, нарушение и точка невозврата"],["Середина","Осложнения, повороты и цена каждой попытки"],["Перелом","Низшая точка, узнавание и невозможный выбор"],["Конец","Кульминация, цена и новое равновесие"],["Смысл","Выводы: проще всего писать в конце"]];
+const R=[[
+"В последнее время я не могу перестать думать о _.",
+"Мне хотелось бы, чтобы существовала история, в которой _.",
+"Это история о _, но _.",
+"Я всё время представляю себе _.",
+"Незадолго до этого момента _.",
+"Сразу после него _.",
+"Я всё время возвращаюсь к мысли о _."],[
+"Действие происходит в _, в то время, когда _.",
+"Место, которое {N} называет домом, — _.",
+"В повседневном окружении героя всегда есть _.",
+"Каждый день {N} видит рядом _.",
+"Здесь считается нормальным _, хотя чужаку это показалось бы странным.",
+"Правила, писаные и неписаные, такие: _ разрешено, а _ — нет.",
+"Власть принадлежит _, и они удерживают её с помощью _.",
+"Обычные люди живут под давлением _.",
+"Прошлое всё ещё определяет настоящее: _.",
+"Тот, кто нарушает правила, _.",
+"Ещё до начала истории _ хрупко или вот-вот сломается."],[
+"{N} — _.",
+"Внешне и по манере держаться {N} — _.",
+"{N} родом из _.",
+"Под давлением {N} реагирует так: _.",
+"{N} боится _ и жаждет _.",
+"{N} хочет _, потому что _.",
+"На самом деле, сам того не зная, {N} нуждается в _.",
+"{N} верит, что _.",
+"{N} до сих пор живёт под влиянием прошлого события: _.",
+"{N}: главная слабость — _.",
+"{N} действительно хорошо умеет _.",
+"{N}: противоречие в характере — _.",
+"{N} скрывает _.",
+"{N} ни за что не переступит черту: _.",
+"{N}: обычный день выглядит так — _.",
+"Окружающие считают, что {N} — _, но на самом деле _.",
+"{N} пожертвует _ ради желаемого, но никогда не пожертвует _.",
+"За всеми мелкими целями {N} гонится за _.",
+"{N} дорожит _, но также и _, и эти два начала сталкиваются, когда _."],[
+"Главное противостояние: _.",
+"Оно хочет _, и изнутри это выглядит оправданным, потому что _.",
+"Чем оно похоже на героя: _; чем отличается: _.",
+"Его главное преимущество — _.",
+"Если бы герой ничего не предпринимал, оно бы _.",
+"Внутренний враг героя — та часть, которая _.",
+"Кто-то близкий мешает герою, пусть и из любви: _.",
+"Помимо людей, на героя давит _."],[
+"Союзники героя: _, и каждый из них даёт ему _.",
+"Тот, кто бросает вызов убеждениям героя, живя иначе, — _.",
+"Контрастный персонаж, который оттеняет героя, — _.",
+"Центральные отношения связывают героя и _, а напряжение в них — _.",
+"Наставник героя — _, который умалчивает или ошибается в _.",
+"_ мог бы предать или бросить героя, потому что _.",
+"У остальных свои желания: _.",
+"Больше всего герой заботится о _, и больше всего ранит _."],[
+"В начале жизнь героя такова: _, а не хватает в ней _.",
+"Открывающая сцена показывает _.",
+"Всё меняется, когда _.",
+"{N} не может это проигнорировать, потому что _.",
+"Сначала {N} реагирует так: _.",
+"Точка невозврата наступает, когда {N} решается _.",
+"С этого момента {N} берётся за _, и план такой: _.",
+"Если {N} добьётся своего, _; если нет, _.",
+"Время имеет значение, потому что _."],[
+"Первая настоящая попытка — _, и мир сопротивляется так: _.",
+"По пути {N} узнаёт _.",
+"Препятствие за препятствием: сначала _, из-за этого _, а из-за этого _.",
+"План рушится, когда _, и {N} импровизирует: _.",
+"Ставки растут, когда _.",
+"В середине истории происходит _, и история становится другой.",
+"Отношения меняются: _ становится союзником, а _ отворачивается.",
+"Противник наносит ответный удар: _.",
+"Раскрывается тайна: _.",
+"Слабость героя подталкивает его к _, и это стоит _.",
+"{N} ближе всего к переменам, когда _, но откатывается назад, когда _."],[
+"В самой низкой точке потеряно _.",
+"{N} наконец понимает _.",
+"Невозможный выбор — между _ и _.",
+"{N} решает _, и это показывает, кто есть {N} на самом деле."],[
+"История заканчивается так: _.",
+"Кульминация: _.",
+"Что касается желаемого: _.",
+"Что касается необходимого: _.",
+"Противостояние заканчивается, когда _.",
+"Цена: _.",
+"Потом мир становится _, но _ остаётся прежним.",
+"К концу {N} _.",
+"Что до остальных: _.",
+"Финальный образ — _.",
+"Намеренно оставлено открытым: _."],[
+"Путь героя говорит о том, что _.",
+"К концу читатель должен понять _, чего не понимал вначале.",
+"История снова и снова возвращается к _.",
+"Заложено рано и окупается поздно: _.",
+"Сердце истории — сцена, где _.",
+"Пока неясно: _."]];
+const U={en:{sub:"Complete the sentences you can, in any order, and skip the rest. They are stitched into one telling beside you. You can also type straight into the story box.",what:"What do you have so far?",ent:["A situation","An image or scene","A character","A place","A feeling or idea","An ending","Nothing yet"],nl:"Call the main character",np:"a name, “the main character”, “K”…",fb:"the main character",side:"The story so far",clr:"Clear all",sure:"Sure?",cpy:"Copy text",cd:"Copied ✦",op:"Your answers will gather here as a story told in your own words. You can type here too.",bl:"Blank",w:" words"},
+ru:{sub:"Продолжайте предложения, которые можете, в любом порядке, остальные пропускайте. Они складываются в один рассказ рядом. Прямо в окне рассказа тоже можно писать.",what:"Что у вас уже есть?",ent:["Ситуация","Образ или сцена","Персонаж","Место","Чувство или идея","Финал","Пока ничего"],nl:"Назовите главного героя",np:"имя, «главный герой», «К.»…",fb:"главный герой",side:"История пока",clr:"Очистить всё",sure:"Точно?",cpy:"Копировать",cd:"Скопировано ✦",op:"Ваши ответы будут собираться здесь, как история, рассказанная вашими словами. Сюда можно писать и самому.",bl:"Пропуск",w:" слов"}};
+const E=["s","i","c","p","f","e","n"],KEY="prima-materia-v3",$=id=>document.getElementById(id);
+const L=[];S.forEach((s,k)=>s[2].forEach(t=>{const j=t.indexOf("|"),x={s:k,g:t.slice(0,j),p:t.slice(j+1).split("_")};x.n=x.p.length-1;L.push(x)}));
+R.flat().forEach((t,i)=>{const r=t.split("_");if(L[i]&&r.length-1===L[i].n)L[i].r=r});
+const fresh=l=>({name:"",lang:l,text:"",pv:L.map(()=>null),a:L.map(x=>Array(x.n).fill(""))});
+let st=fresh(/^ru/i.test(navigator.language||"")?"ru":"en"),mode="",armed=0;
+try{const r=JSON.parse(localStorage.getItem(KEY)||"null");if(r&&r.a&&r.pv&&r.a.length===L.length&&r.a.every((v,i)=>v.length===L[i].n))st=r}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
+const u=()=>U[st.lang],pr=x=>st.lang==="ru"&&x.r?x.r:x.p,nm=()=>st.name.trim()||u().fb;
+const clean=v=>v.trim().replace(/\s*\n\s*/g," ").replace(/[.,;:]+$/,"");
+function fill(i){const x=L[i],a=st.a[i],p=pr(x);let s="";for(let k=0;k<=x.n;k++){s+=p[k].split("{N}").join(nm());if(k<x.n){const c=clean(a[k]);if(!c)return null;s+=c}}return s.charAt(0).toUpperCase()+s.slice(1)}
+function ins(t,i,s){const pos=j=>st.pv[j]==null?-1:t.indexOf(st.pv[j]);let pj=-1,nj=-1;
+for(let j=i-1;j>=0;j--)if(pos(j)>=0){pj=j;break}
+for(let j=i+1;j<L.length;j++)if(pos(j)>=0){nj=j;break}
+const e=pj>=0?pos(pj)+st.pv[pj].length:0,a=nj>=0?pos(nj):0;
+if(pj>=0&&L[pj].s===L[i].s)return t.slice(0,e)+" "+s+t.slice(e);
+if(nj>=0&&L[nj].s===L[i].s)return t.slice(0,a)+s+" "+t.slice(a);
+if(pj>=0)return t.slice(0,e)+"\n\n"+s+t.slice(e);
+if(nj>=0)return t.slice(0,a)+s+"\n\n"+t.slice(a);
+return t?t.replace(/\s+$/,"")+"\n\n"+s:s}
+function sync(){let t=st.text;
+L.forEach((x,i)=>{const s=fill(i),p=st.pv[i];if(s===p)return;const at=p!=null?t.indexOf(p):-1;
+if(at>=0){if(s!=null)t=t.slice(0,at)+s+t.slice(at+p.length);else{let e=at+p.length;if(t[e]===" ")e++;t=(t.slice(0,at)+t.slice(e)).replace(/ +\n/g,"\n").replace(/\n{3,}/g,"\n\n").replace(/^\s+/,"")}}
+else if(s!=null)t=ins(t,i,s);
+st.pv[i]=s});
+st.text=t;$("out").value=t}
+const tx=[],tas=[],secs=[],list=$("list"),chips=$("chips");
+const fit=t=>{t.style.height="auto";t.style.height=Math.max(44,t.scrollHeight)+"px"};
+function tick(){L.forEach((x,i)=>{const p=tx[i],q=pr(x);p.textContent="";q.forEach((t,k)=>{p.append(t.split("{N}").join(nm()));if(k<x.n){const b=document.createElement("b");b.className="bl";b.textContent="…";p.append(b)}})})}
+S.forEach((s,k)=>{const sec=document.createElement("section");sec.id="sec"+k;sec.innerHTML='<div class="sec"></div><div class="lens"></div>';secs[k]=sec;list.append(sec);
+const b=document.createElement("button");b.className="chip";b.textContent=k+1;b.onclick=()=>sec.scrollIntoView({behavior:"smooth",block:"start"});chips.append(b)});
+L.forEach((x,i)=>{const d=document.createElement("div");d.className="stem";d.id="st"+i;const p=document.createElement("p");p.className="tx";tx[i]=p;d.append(p);tas[i]=[];
+for(let k=0;k<x.n;k++){const t=document.createElement("textarea");t.value=st.a[i][k];t.rows=1;
+t.addEventListener("input",()=>{st.a[i][k]=t.value;fit(t);sync();paint();save()});d.append(t);tas[i].push(t)}
+secs[x.s].append(d)});
+E.forEach(g=>{const b=document.createElement("button");b.className="eb";b.dataset.g=g;b.onclick=()=>{mode=mode===g?"":g;mark(true)};$("entry").append(b)});
+function mark(go){[...$("entry").children].forEach(b=>b.classList.toggle("on",b.dataset.g===mode));let f=-1;L.forEach((x,i)=>{const on=mode&&x.g.includes(mode);$("st"+i).classList.toggle("sug",!!on);if(on&&f<0)f=i});
+if(go&&f>=0){$("st"+f).scrollIntoView({behavior:"smooth",block:"center"});setTimeout(()=>tas[f][0].focus({preventScroll:true}),400)}}
+function paint(){const t=st.text.trim();$("wc").textContent=(t?t.split(/\s+/).length:0)+u().w;
+[...chips.children].forEach((b,k)=>b.classList.toggle("done",L.some((x,i)=>x.s===k&&st.a[i].some(v=>v.trim()))))}
+function applyLang(){const U_=u();document.documentElement.lang=st.lang;
+document.querySelectorAll(".lb").forEach(b=>b.classList.toggle("on",b.dataset.l===st.lang));
+$("sub").textContent=U_.sub;$("what").textContent=U_.what;$("namelbl").textContent=U_.nl;$("name").placeholder=U_.np;$("sidet").textContent=U_.side;$("clr").textContent=U_.clr;$("cpy").textContent=U_.cpy;$("out").placeholder=U_.op;
+[...$("entry").children].forEach((b,i)=>b.textContent=U_.ent[i]);
+S.forEach((s,k)=>{const t=st.lang==="ru"?RT[k]:[s[0],s[1]];secs[k].children[0].textContent=t[0];secs[k].children[1].textContent=t[1];chips.children[k].title=t[0];chips.children[k].setAttribute("aria-label",t[0])});
+L.forEach((x,i)=>tas[i].forEach((t,k)=>{t.placeholder=x.n>1?U_.bl+" "+(k+1)+"…":"…";t.setAttribute("aria-label",pr(x).join("…").replace("{N}",nm()))}));tick()}
+document.querySelectorAll(".lb").forEach(b=>b.onclick=()=>{st.lang=b.dataset.l;applyLang();sync();paint();save()});
+$("name").value=st.name;$("out").value=st.text;
+$("name").addEventListener("input",e=>{st.name=e.target.value;tick();sync();paint();save()});
+$("out").addEventListener("input",e=>{st.text=e.target.value;paint();save()});
+$("cpy").onclick=async()=>{const t=st.text;if(!t.trim())return;try{await navigator.clipboard.writeText(t)}catch(e){$("out").select();try{document.execCommand("copy")}catch(_){}}
+$("cpy").textContent=u().cd;setTimeout(()=>$("cpy").textContent=u().cpy,1600)};
+$("clr").onclick=()=>{if(!armed){armed=1;$("clr").textContent=u().sure;setTimeout(()=>{armed=0;$("clr").textContent=u().clr},2500);return}
+armed=0;$("clr").textContent=u().clr;st=fresh(st.lang);$("name").value="";$("out").value="";tas.flat().forEach(t=>{t.value="";fit(t)});tick();paint();save()};
+$("up").onclick=()=>window.scrollTo({top:0,behavior:"smooth"});
+$("dn").onclick=()=>window.scrollTo({top:document.documentElement.scrollHeight,behavior:"smooth"});
+applyLang();paint();tas.flat().forEach(fit);
+</script>
+</body>
+</html>
